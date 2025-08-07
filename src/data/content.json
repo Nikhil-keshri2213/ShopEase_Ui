@@ -255,7 +255,7 @@
       {
         "id": 1,
         "title": "Black Sweatshirt",
-        "description": "100% Bio-washed Cotton – makes the fabric extra soft & silky. Flexible ribbed crew neck. Precisely stitched with no pilling & no fading. Provide  all-time comfort. Anytime, anywhere. Infinite range of matte-finish HD prints.",
+        "description": "100% Bio-washed Cotton.",
         "category_id": 2,
         "type_id": 10,
         "brand": "Nike",
@@ -263,8 +263,8 @@
         "size": ["S", "M", "L"],
         "color": ["Black","Blue"],
         "discount": 20,
-        "thumbnail": "https://codedev.b-cdn.net/products/sweatshirt-black.jpg",
-        "images": ["https://codedev.b-cdn.net/products/sweatshirt-black.jpg", "https://codedev.b-cdn.net/products/woman-black-shirt-giving-neutral-flirtatious-poses.jpg","https://codedev.b-cdn.net/products/woman-holding-coffee-cup-smiling.jpg"],
+        "thumbnail": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQKdfw-48jh69An0-9KAJ70rs0_YDSUxp0ILogYqxhIb2YtNbodF1vXMo9kgNeVicgJ8JdPTtZNqawy8G2iLDl6aY3b6Xjxq1SPeWtxS9Sf2amHvgyak_JXYw",
+        "images": ["https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcS2g_OMM7L4g0yExvN4iqknqsHP6vEPRLqXqZeuA_7AGowTFaMmN6_LOL3XRQYu4EQxmbVAAXf1R1pmHoW7FT90kzwXg3NjlPPv6wq8Wa7X", "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQpJh2ncHRBFeuG7ki5xAvGKYRwM75pCRGxOdSazz4i7n-55BIGp89Cn2xwK9m2B51L1DrJ33fLO5fZO-LBkk5hDpCvsLLFr568D2j5BkF5UKIy82IEt6e-uA","https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcROkKnCGRwM4OB4hnsybwN13MFsgVvK921-KhV6IkQ1KGnCrg2NNlHq7ujEHHv7d_--oFjlkinkAS9WZ0IsGb_pC8jzrjub7BSgTP-_coJm"],
         "rating": 4.5
       },
       {
