@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import  Breadcrumb  from "../../../components/Breadcrumb/Breadcrumb";
+
+const BreadcrumbLink = [
+  {title:'Shop',path:'/'},{title:"Women", path:"/women"},{title:"Top", path:"/top"}
+]
+
 
 export const ProductDetail = () => {
   const { product } = useLoaderData();
@@ -15,7 +21,7 @@ export const ProductDetail = () => {
             <div className="flex md:flex-col flex-row justify-center h-full">
               {
                 product?.images[0]?.startsWith('http') && product?.images?.map((m, index) => (
-                    <button onClick={()=>setImage(m)} className="border rounded-lg w-fit p-2 mb-2">
+                    <button key={index} onClick={()=>setImage(m)} className="border rounded-lg w-fit p-2 mb-2">
                     <img src={m}
                         className="h-[48px] w-[48px]"
                         alt={"sample-" + index}
@@ -34,7 +40,11 @@ export const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <div className="w-[60%]">{/* Product Description */}</div>
+      <div className="w-[60%]">
+        {/* Product Description */}
+        <Breadcrumb links={BreadcrumbLink}/>
+      </div>
     </div>
   );
 };
+export default ProductDetail
