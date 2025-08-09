@@ -1,15 +1,39 @@
-import React, { useState } from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import React, { useEffect, useMemo, useState } from "react";
+import { Link, useLoaderData, useParams } from "react-router-dom";
 import  Breadcrumb  from "../../../components/Breadcrumb/Breadcrumb";
+import content from '../../../data/content.json'
+import Rating from "../../../components/Rating/rating";
+import {SizeFilter} from '../../../components/Filters/SizeFilter'
 
-const BreadcrumbLink = [
-  {title:'Shop',path:'/'},{title:"Women", path:"/women"},{title:"Top", path:"/top"}
-]
 
+const categories = content?.categories;
 
 export const ProductDetail = () => {
   const { product } = useLoaderData();
   const [image, setImage] = useState(product?.images[0]?.startsWith('http') ? product.images[0] : product?.thumbnail);
+  const [BreadcrumbLink, setBreadcrumbLink] = useState([]);
+
+  const productCategory = useMemo(()=>{
+    return categories?.find((category)=> category?.id === product?.category_id);
+  },[product]);
+
+  useEffect(()=>{
+    setBreadcrumbLink([]);
+    const arrayLinks = [{title:'Shop',path:'/'},{
+      title:productCategory?.name,
+      path:productCategory?.path
+    }];
+    
+    const productType = productCategory?.types?.find((item)=>item?.type_id === product?.type_id);
+    console.log("Product Type",productType, productCategory);
+    
+    if(productType){
+      arrayLinks?.push({
+      title:productType?.name,
+      path:productType?.name
+    })}
+    setBreadcrumbLink(arrayLinks);
+  },[productCategory, product])
 
   return (
     <div className="flex flex-col md:flex-row p-10">
@@ -40,9 +64,18 @@ export const ProductDetail = () => {
           </div>
         </div>
       </div>
-      <div className="w-[60%]">
+      <div className="w-[60%] px-10">
         {/* Product Description */}
         <Breadcrumb links={BreadcrumbLink}/>
+        <p className="text-3xl pt-3 pb-3">{product?.title}</p>
+        <Rating rating={product?.rating}/> 
+        <div className="flex flex-col pt-3">
+          <div className="flex gap-2">
+            <p className="text-sm bold">Select Size</p>
+            <Link className="text-sm text-gray-500 hover:text-gray-900">{'Size Guide ->'}</Link>
+            <SizeFilter sizes={product?.size}/>
+          </div>
+        </div>
       </div>
     </div>
   );
