@@ -4,6 +4,8 @@ import  Breadcrumb  from "../../../components/Breadcrumb/Breadcrumb";
 import content from '../../../data/content.json'
 import Rating from "../../../components/Rating/rating";
 import {SizeFilter} from '../../../components/Filters/SizeFilter'
+import ProductColors from "./ProductColors";
+import {CartIcon} from '../../../components/Common/CartIcon'
 
 
 const categories = content?.categories;
@@ -67,14 +69,21 @@ export const ProductDetail = () => {
       <div className="w-[60%] px-10">
         {/* Product Description */}
         <Breadcrumb links={BreadcrumbLink}/>
-        <p className="text-3xl pt-3 pb-3">{product?.title}</p>
+        <p className="text-3xl pt-3 pb-4">{product?.title}</p>
         <Rating rating={product?.rating}/> 
         <div className="flex flex-col pt-3">
           <div className="flex gap-2">
-            <p className="text-sm bold">Select Size</p>
-            <Link className="text-sm text-gray-500 hover:text-gray-900">{'Size Guide ->'}</Link>
-            <SizeFilter sizes={product?.size}/>
+            <p className="text-sm bold px-2">Select Size</p>
+            <Link className="text-sm text-gray-500 hover:text-gray-900" to={'https://en.wikipedia.org/wiki/Clothing_sizes'} target="blank">{'Size Guide ->'}</Link>
           </div>
+        </div>
+        <div className="mt-3"><SizeFilter sizes={product?.size} hideTitle={true}/></div>
+        <div>
+          <p className="text-sm px-2">Colors Available</p>
+          <ProductColors colors={product?.color}/>
+        </div>
+        <div className="flex pt-5 px-2">
+          <button className="flex items-center gap-2 bg-black text-white rounded-lg px-4 py-2"><CartIcon bgColor="black" />Add to cart</button>
         </div>
       </div>
     </div>
