@@ -5,9 +5,15 @@ import App from './App.jsx'
 import 'react-multi-carousel/lib/styles.css';
 import {RouterProvider} from 'react-router-dom';
 import { router } from './routes.jsx';
+import { Provider } from 'react-redux';
+import store from './store/store.js';
+import Layout from './Layout.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>,
+  
+    <Provider store={store}>
+    <RouterProvider router={router} >
+      <Layout/>
+    </RouterProvider>
+    </Provider>
 )
