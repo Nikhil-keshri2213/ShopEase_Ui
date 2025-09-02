@@ -1,2 +1,1 @@
-Working on SizeFilter - Date 6 August, 2025
-DeadLine: 10 Sept, 2025
+Ui Part is almost done, currently working on Spring Server for Backend
