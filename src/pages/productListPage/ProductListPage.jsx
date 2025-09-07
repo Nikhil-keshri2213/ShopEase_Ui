@@ -84,6 +84,7 @@ export const ProductListPage = ({ categoryType }) => {
                 key={item?.id + " " + index}
                 {...item}
                 title={item?.name}
+                slug={item?.slug}
               />
             );
           })}

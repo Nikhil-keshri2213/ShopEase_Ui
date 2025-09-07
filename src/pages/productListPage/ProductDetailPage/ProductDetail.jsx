@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import  Breadcrumb  from "../../../components/Breadcrumb/Breadcrumb";
 import content from '../../../data/content.json'
@@ -12,8 +12,11 @@ import SvgShipping from '../../../components/Common/SvgShipping'
 import SvgReturn from '../../../components/Common/SvgReturn'
 import SectionHeading from "../../../components/Sections/SectionHeading/SectionHeading";
 import ProductCard from "../ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import _ from 'lodash';
+import { getAllProducts } from "../../../api/fetchProducts";
 
-const categories = content?.categories;
+//const categories = content?.categories;
 
 const extraSections = [
   {
@@ -38,32 +41,69 @@ export const ProductDetail = () => {
   const { product } = useLoaderData();
   const [image, setImage] = useState();
   const [BreadcrumbLink, setBreadcrumbLink] = useState([]);
+  const [similarProducts, setSimilarProducts] = useState([]);
+  const categories = useSelector((state) => state?.categoryState?.categories);
   
-  const similarProduct = useMemo(()=>{
-    return content?.products?.filter((item)=> item?.type_id === product?.type_id && item?.id !== product?.id)
-  },[product]);
+  // const dispatch = useDispatch();
+  // const cartItems = useSelector((state) => state.cartState?.cart);
+  
+  // const similarProducts = useMemo(()=>{
+  //   return content?.products?.filter((item)=> item?.type_id === product?.type_id && item?.id !== product?.id)
+  // },[product]);
   
   const productCategory = useMemo(()=>{
-    return categories?.find((category)=> category?.id === product?.category_id);
-  },[product]);
+    return categories?.find((category)=> category?.id === product?.categoryId);
+  },[product,categories]);
 
   useEffect(()=>{
-    setImage(product?.images[0]?.startsWith('http') ? product.images[0] : product?.thumbnail)
+    getAllProducts(product?.categoryId, product?.categoryTypeId).then(res=>{
+      const excludedproduct = res?.filter((item)=> item?.id !== product?.id);
+      setSimilarProducts(excludedproduct)
+    }).catch(()=>[
+
+    ])
+  },[product?.categoryId, product?.categoryTypeId])
+
+  useEffect(()=>{
+    setImage(product?.thumbnail)
     setBreadcrumbLink([]);
     const arrayLinks = [{title:'Shop',path:'/'},{
       title:productCategory?.name,
       path:productCategory?.path
     }];
     
-    const productType = productCategory?.types?.find((item)=>item?.type_id === product?.type_id);
-
+    const productType = productCategory?.categoryTypes?.find((item)=> item?.id === product?.categoryTypeId)
+    
     if(productType){
       arrayLinks?.push({
       title:productType?.name,
       path:productType?.name
     })}
+
+    // const productType = productCategory?.types?.find((item)=>item?.type_id === product?.type_id);
+    // if(productType){
+    //   arrayLinks?.push({
+    //   title:productType?.name,
+    //   path:productType?.name
+    // })}
+
     setBreadcrumbLink(arrayLinks);
   },[productCategory, product])
+
+  //cart
+  // const addItemToCart = useCallback(()=>{
+
+  // },[]);
+
+  const colors = useMemo(()=>{
+    const colorSet = _.uniq(_.map(product?.variants, 'color'));
+    return colorSet
+  },[product])
+
+  const sizes = useMemo(()=>{
+    const sizeSet = _.uniq(_.map(product?.variants, 'size'));
+    return sizeSet
+  },[product])
 
   return (
     <>
@@ -76,10 +116,10 @@ export const ProductDetail = () => {
             {/* Stack Image */}
             <div className="flex md:flex-col flex-row justify-center h-full">
               {
-                product?.images[0]?.startsWith('http') && product?.images?.map((m, index) => (
-                    <button key={index} onClick={()=>setImage(m)} className="border rounded-lg w-fit p-2 mb-2">
-                    <img src={m}
-                        className="h-[48px] w-[48px]"
+                  product?.productResource?.map((item, index) => (
+                    <button key={index} onClick={()=>setImage(item?.url)} className="border rounded-lg w-fit p-2 mb-2">
+                    <img src={item?.url}
+                        className="h-[48px] w-[48px] object-center"
                         alt={"sample-" + index}
                     />
                     </button>
@@ -91,8 +131,8 @@ export const ProductDetail = () => {
           <div className="w-full md:w-[80%] flex justify-center md:pt-0 pt-10">
             <img
               src={image}
-              alt={product?.title}
-              className="h-full w-full max-h-[520px] border rounded-lg cursor-pointer object-cover"
+              alt={product?.name}
+              className="h-full w-500 max-h-[520px] border rounded-lg cursor-pointer object-center"
             />
           </div>
 
@@ -103,7 +143,7 @@ export const ProductDetail = () => {
         {/* Product Description */}
         <Breadcrumb links={BreadcrumbLink}/>
         
-        <p className="text-3xl pt-3 pb-4">{product?.title}</p>
+        <p className="text-3xl pt-3 pb-4">{product?.name}</p>
         
         <Rating rating={product?.rating}/>
         
@@ -118,12 +158,12 @@ export const ProductDetail = () => {
         </div>
         
         <div className="mt-3">
-          <SizeFilter sizes={product?.size} hideTitle={true}/>
+          <SizeFilter sizes={sizes} hideTitle={true} multi={false}/>
         </div>
         
         <div>
           <p className="text-sm px-2">Colors Available</p>
-          <ProductColors colors={product?.color}/>
+          <ProductColors colors={colors}/>
         </div>
         
         <div className="flex pt-5 px-2 pb-4">
@@ -134,8 +174,8 @@ export const ProductDetail = () => {
         
         <div className="grid grid-cols-2 pt-4 gap-4 text-gray-600">
           {
-            extraSections?.map((section)=>(
-            <div className="flex items-center">
+            extraSections?.map((section, index)=>(
+            <div className="flex items-center" key={index}>
                 {section?.icon}
                 <p className="px-3">{section?.label}</p>
               </div>
@@ -158,10 +198,10 @@ export const ProductDetail = () => {
       <div className="pt-4 px-12 pb-4 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-4">
         {/* <ProductCard {...productListItems[0]}/> */}
         {
-          similarProduct?.map((item, index) => {
+          similarProducts?.map((item, index) => {
           return <ProductCard key={index} {...item} />;})
         }
-        {!similarProduct?.length && <p>More Products Comming soon.</p> }
+        {!similarProducts?.length && <p>More Products Comming soon.</p> }
       </div>
     </div>
     </>

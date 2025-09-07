@@ -2,10 +2,10 @@ import React from 'react'
 import SvgFavourite from '../../components/Common/SvgFavourite'
 import { Link } from 'react-router-dom'
 
-export const ProductCard = ({id, title, description, price, discount, rating, brand, thumbnail }) => {
+export const ProductCard = ({id, title, description, price, discount, rating, brand, thumbnail, slug}) => {
   return (
     <div className='relative flex flex-col hover:scale-105 transition-transform duration-300 w-[280px]'>
-      <Link to={`/products/${id}`}>
+      <Link to={`/products/${slug}`}>
       {/* Image */}
       <img
         className='h-[320px] w-[280px] border rounded-lg object-cover block'
