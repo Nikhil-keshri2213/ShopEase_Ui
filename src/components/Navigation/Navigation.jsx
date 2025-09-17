@@ -5,7 +5,7 @@ import { CartIcon } from '../Common/CartIcon'
 import './Navigation.css';
 import { Link, NavLink } from 'react-router-dom';
 
-function Navigation() {
+function Navigation({variant = "default"}) {
   return (
     <nav className="flex items-center py-6 px-16 justify-between gap-40">
       <div className="flex items-center gap-6">
@@ -14,6 +14,7 @@ function Navigation() {
         </a>
       </div>
 
+      {variant === "default" &&
       <div className="flex flex-wrap items-center gap-12 flex-1">
         <ul className="flex gap-16 text-gray-700">
           <li><NavLink to="/" className={({isActive}) => isActive ? 'active-link':''}>Shop</NavLink></li>
@@ -22,7 +23,9 @@ function Navigation() {
           <li><NavLink to="/kids" className={({isActive}) => isActive ? 'active-link':''}>Kids</NavLink></li>
         </ul>
       </div>
+      }
 
+      {variant === "default" &&
       <div className="flex justify-center">
         {/* Search bar */}
         <div className="border rounded-full flex overflow-hidden">
@@ -38,16 +41,23 @@ function Navigation() {
           </div>
         </div>
       </div>
+      }
 
       <div className="flex flex-wrap items-center gap-4">
         {/* Action Items - icons */}
+        {variant === "default" &&
           <ul className="flex gap-8 ">
             <li><button><Wishlist /></button></li>
             <li><button onClick={() => navigate("/account-details/profile")}><AccountIcon /></button></li>
             <li><NavLink to='/cart-items'><CartIcon/></NavLink></li>
-          </ul>
-      </div>
+          </ul>}
 
+          {variant === "auth" && 
+          <ul className='flex gap-8'>
+            <li className='text-black border border-black hover:bg-slate-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none'><NavLink to={"/v1/login"} className={({isActive})=> isActive ? 'active-link':''}>Login</NavLink></li>
+            <li className='text-black border border-black hover:bg-slate-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none'><NavLink to={"/v1/register"} className={({isActive})=> isActive ? 'active-link':''}>Register</NavLink></li>
+          </ul>}
+      </div>
     </nav>
   );
 }

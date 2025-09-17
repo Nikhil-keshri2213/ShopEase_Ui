@@ -148,7 +148,7 @@ export const ProductDetail = () => {
         <Rating rating={product?.rating}/>
         
         {/* Price Tag */}
-        <p className="text-xl bold pt-2 px-2">${product?.price}</p>
+        <p className="text-xl bold pt-2 px-2">₹ {product?.price}.00</p>
         
         <div className="flex flex-col pt-3">
           <div className="flex gap-2">

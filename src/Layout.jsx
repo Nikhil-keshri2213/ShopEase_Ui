@@ -6,6 +6,7 @@ import content from "./data/content.json";
 import Spinner from "./components/Spinner/Spinner";
 import { useSelector } from "react-redux";
 
+//ShopApplicationWrapper 
 function Layout() {
 
   const isLoading = useSelector((state)=> state?.commonState?.loading);
