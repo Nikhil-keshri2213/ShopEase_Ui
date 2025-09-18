@@ -1,23 +1,29 @@
-import {jwtDecode} from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode';
 
-export const saveToken = (Token) =>{
-    localStorage.setItem('authToken',Token);
-}
+const TOKEN_KEY = 'authToken'; // keep the key consistent
 
-export const logOut = () =>{
-    localStorage.clear();
-}
+export const saveToken = (token) => {
+  localStorage.setItem(TOKEN_KEY, token);
+};
 
-export const isTokenValid = () =>{
-    const token = localStorage.getItem('jwtToken');
-    if(!token) return false;
+export const getToken = () => {
+  return localStorage.getItem(TOKEN_KEY);
+};
 
-    try {
-        const decode = jwtDecode(token);
-        const currentTime = Date.now() / 1000;
-        return decode.exp > currentTime;
-    } catch (error) {
-        console.error("Invalid Token", error);
-        return false;
-    }
-}
+export const logOut = () => {
+  localStorage.removeItem(TOKEN_KEY);
+};
+
+export const isTokenValid = () => {
+  const token = getToken();
+  if (!token) return false;
+
+  try {
+    const decoded = jwtDecode(token);
+    const currentTime = Date.now() / 1000;
+    return decoded.exp > currentTime; // true if not expired
+  } catch (error) {
+    console.error('Invalid Token', error);
+    return false;
+  }
+};

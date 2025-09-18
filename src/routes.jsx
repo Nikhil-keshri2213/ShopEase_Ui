@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
       }
     ]
   },{
-    path:'/oauth2/callback',
+    path:"/oauth2/callback",
     element:<OAuth2LoginCallback/>
   }
 ]);
