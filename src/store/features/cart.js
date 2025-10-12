@@ -3,31 +3,36 @@ import { createSlice } from "@reduxjs/toolkit"
 // {id:Number,quantity:number}
 
 const initialState = {
-    cart:JSON.parse(localStorage.getItem('cart')) || []
+    cart: JSON.parse(localStorage.getItem('cart')) || []
 }
 
 const cartSlice = createSlice({
-    name:'cartState',
-    initialState:initialState,
-    reducers:{
-        addToCart:(state,action) =>{
+    name: 'cartState',
+    initialState: initialState,
+    reducers:
+    {
+        addToCart: (state, action) => {
             state.cart.push(action?.payload)
             return state;
         },
-        removeFromCart:(state,action)=>{
+
+        removeFromCart: (state, action) => {
             return {
                 ...state,
-                cart :  state?.cart?.filter((item) => ((item.id !== action?.payload?.productId) && (item?.variant?.id !== action?.payload?.variantId)))
-            }
-        },
-        updateQuantity:(state,action) =>{
+                cart: state.cart.filter(item =>
+                    !(item.productId === action.payload.productId && item.variant?.id === action.payload.variantId)
+                )
+            };
+        }
+        ,
+
+        updateQuantity: (state, action) => {
             return {
-                ...state,
-                cart: state?.cart?.map((item)=>{
-                    if(item?.variant?.id === action?.payload?.variant_id){
+                ...state, cart: state?.cart?.map((item) => {
+                    if (item?.variant?.id === action?.payload?.variant_id) {
                         return {
                             ...item,
-                            quantity:action?.payload?.quantity,
+                            quantity: action?.payload?.quantity,
                             subTotal: action?.payload?.quantity * item.price
                         }
                     }
@@ -35,10 +40,11 @@ const cartSlice = createSlice({
                 })
             };
         },
-        deleteCart : (state,action)=>{
+
+        deleteCart: (state, action) => {
             return {
                 ...state,
-                cart:[]
+                cart: []
             }
         }
     }

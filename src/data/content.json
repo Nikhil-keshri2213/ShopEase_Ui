@@ -3,7 +3,7 @@
         "shop":{
             "sections":[
                 {
-                    "title":"| Categories For Women",
+                    "title":"Categories For Women",
                     "data":[
                         {
                             "title":"Hoodies & Sweetshirt",
@@ -28,7 +28,7 @@
                     ]
                 },
                 {
-                    "title":"| Categories For Men",
+                    "title":"Categories For Men",
                     "data":[
                         {
                             "title":"Shirts",

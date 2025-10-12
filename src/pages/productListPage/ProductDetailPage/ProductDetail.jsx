@@ -15,6 +15,7 @@ import ProductCard from "../ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import _ from 'lodash';
 import { getAllProducts } from "../../../api/fetchProducts";
+import { addItemToCartAction } from "../../../store/actions/cartAction";
 
 //const categories = content?.categories;
 
@@ -41,10 +42,13 @@ export const ProductDetail = () => {
   const { product } = useLoaderData();
   const [image, setImage] = useState();
   const [BreadcrumbLink, setBreadcrumbLink] = useState([]);
+  const dispatch = useDispatch();
   const [similarProducts, setSimilarProducts] = useState([]);
   const categories = useSelector((state) => state?.categoryState?.categories);
-  
-  // const dispatch = useDispatch();
+  const [selectSize, setSelectSize] = useState();
+  const [error, setError] = useState('');
+
+
   // const cartItems = useSelector((state) => state.cartState?.cart);
   
   // const similarProducts = useMemo(()=>{
@@ -90,10 +94,37 @@ export const ProductDetail = () => {
     setBreadcrumbLink(arrayLinks);
   },[productCategory, product])
 
-  //cart
-  // const addItemToCart = useCallback(()=>{
+  const addItemToCart = useCallback(()=>{
+    console.log("Size: ",selectSize); 
+    if (!selectSize) {
+      setError('Please select one size.')
+    }else{
+      const selectedVariant = product?.variants?.filter((variant)=>variant.size === selectSize);
+      
+      console.log("Selected: ", selectedVariant);
 
-  // },[]);
+      if (selectedVariant?.[0].stockQuantity > 0) {
+        dispatch(addItemToCartAction({
+          productId:product?.id,
+          thumbnail:product?.thumbnail,
+          name:product?.name,
+          brand:product?.brand,
+          variant:selectedVariant,
+          quantity: 1,
+          subTotal: product?.price,
+          price:product?.price,
+        }))
+      }else{
+        setError('Sorry! Out of Stock.')
+      }
+    }
+  },[selectSize, dispatch, product]);
+
+  useEffect(()=>{
+    if(setSelectSize){
+      setError('');
+    }
+  },[selectSize])
 
   const colors = useMemo(()=>{
     const colorSet = _.uniq(_.map(product?.variants, 'color'));
@@ -158,7 +189,7 @@ export const ProductDetail = () => {
         </div>
         
         <div className="mt-3">
-          <SizeFilter sizes={sizes} hideTitle={true} multi={false}/>
+          <SizeFilter onChange={(values)=>setSelectSize(values?.[0])} sizes={sizes} hideTitle={true} multi={false}/>
         </div>
         
         <div>
@@ -167,9 +198,10 @@ export const ProductDetail = () => {
         </div>
         
         <div className="flex pt-5 px-2 pb-4">
-          <button className="flex items-center gap-2 bg-black text-white rounded-lg px-4 py-2"><CartIcon bgColor="black" />Add to cart</button>
+          <button onClick={addItemToCart} className="flex items-center gap-2 bg-black text-white rounded-lg px-4 py-2"><CartIcon bgColor="black" />Add to cart</button>
         </div>
-
+        
+              {error && <p className="text-base text-red-600 px-2">{error}</p> }
         <hr />
         
         <div className="grid grid-cols-2 pt-4 gap-4 text-gray-600">
@@ -187,13 +219,13 @@ export const ProductDetail = () => {
     </div>
 
     {/* Product Description */}
-    <SectionHeading title={"| Product Description"}/>
+    <SectionHeading title={"Product Description"}/>
     <div className="md:w-[50%] w-full px-2 pb-5">
       <p className="px-14">{product?.description}</p>
     </div>
 
     {/* Similar Product */}
-    <SectionHeading title={"| Similar Product"}/>
+    <SectionHeading title={"Similar Product"}/>
     <div className="flex px-10">
       <div className="pt-4 px-12 pb-4 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 gap-4">
         {/* <ProductCard {...productListItems[0]}/> */}

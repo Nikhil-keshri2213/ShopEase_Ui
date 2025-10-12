@@ -1,27 +1,38 @@
 import React from 'react'
 import ArrowIcon from '../common/ArrowIcon'
+import { useNavigate } from 'react-router-dom'
 
-const Card = ({imagePath, title, description, actionArrow, height, width}) => {
+const Card = ({ imagePath, title, description, actionArrow, height = "220px", width = "200px" , titleLinks}) => {
+
+  const navigate = useNavigate();
+
   return (
-    
-    <div className='flex  flex-col p-6'>    
-        <img className={`h-[${height? height:'220px'}] 
-          max-h-[${height? height:'220px'}] 
-          w-[${width? width:'200px'}] 
-          max-w-[${width? width:'220px'}]
-          border rounded-lg hover:scale-105 cursor-pointer`} 
-          width={width??"200px"} 
-          height={height?? "220px"} 
-          src={imagePath} alt='img'/>
-         
-        <div className='flex justify-between items-center'>
-          <div className='flex flex-col'>
-            <p className='text-[16px] p-1'>{title}</p>
-              {description && <p className='text-[12px] px-1 text-gray-600'>{description}</p>}
-          </div>
-          {actionArrow && <span className='cursor-pointer pr-2 items-center'><ArrowIcon /></span>}
+    <div className="flex flex-col p-4 bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer w-fit">
+      
+      {/* Image */}
+      <div className="overflow-hidden rounded-xl" onClick={() => navigate(titleLinks)}>
+        <img
+          src={imagePath}
+          alt={title}
+          style={{ height: height, width: width }}
+          className="object-cover rounded-xl transform transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="flex justify-between items-center mt-4">
+        <div className="flex flex-col">
+          <p className="text-lg font-semibold">{title}</p>
+          {description && <p className="text-sm text-gray-500 mt-1">{description}</p>}
         </div>
-    </div>    
+
+        {actionArrow && (
+          <span className="text-gray-400 hover:text-gray-600 transition-colors" onClick={() => navigate(titleLinks)}>
+            <ArrowIcon />
+          </span>
+        )}
+      </div>
+    </div>
   )
 }
 

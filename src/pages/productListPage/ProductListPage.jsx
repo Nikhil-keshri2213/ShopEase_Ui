@@ -33,13 +33,14 @@ export const ProductListPage = ({ categoryType }) => {
     );
   }, [categoryData, categoryType]);
 
+  
   useEffect(()=>{
-
     if (!category?.id) {
       console.warn("⚠️ Skipping API: categoryId is undefined");
     }
 
     dispatch(setLoading(true));
+
     getAllProducts(category?.id, category?.categoryType).then(res => {
       setProducts(res);
     }).catch(err =>{
@@ -53,28 +54,29 @@ export const ProductListPage = ({ categoryType }) => {
   return (
     <div className="flex">
       <div className="w-[20%] p-[20px] border rounded-lg m-[20px]">
+        
         <div className="flex justify-between">
           <p className="text-[16px] text-gray-600">Filter</p>
           <FilterIcon />
         </div>
+        
         <div>
           <p className="text-[16px] text-black mt-5">Categories</p>
           <Categories types={categoryContent?.types} />
         </div>
         <hr></hr>
-        {/* Price Filter */}
+        
         <PriceFilter />
         <hr></hr>
-        {/* Color Filter */}
+        
         <ColorFilter colors={categoryContent?.meta_data?.colors} />
         <hr></hr>
-        {/* Size Filter */}
+        
         <SizeFilter sizes={categoryContent?.meta_data?.sizes} />
       </div>
 
       <div className="p-[20px]">
         <p className="text-black text-lg">{category?.description}</p>
-        {/* Products */}
 
         <div className="pt-4 px-2 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-8">
           {/* <ProductCard {...productListItems[0]}/> */}

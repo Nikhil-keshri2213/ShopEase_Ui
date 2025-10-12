@@ -3,9 +3,13 @@ import { Wishlist } from '../Common/Wishlist'
 import { AccountIcon } from '../Common/AccountIcon'
 import { CartIcon } from '../Common/CartIcon'
 import './Navigation.css';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { countCartItems } from '../../store/features/cart';
 
 function Navigation({variant = "default"}) {
+  const cartLength = useSelector(countCartItems);
+  const navigate = useNavigate();
   return (
     <nav className="flex items-center py-6 px-16 justify-between gap-40">
       <div className="flex items-center gap-6">
@@ -22,14 +26,13 @@ function Navigation({variant = "default"}) {
           <li><NavLink to="/womens" className={({isActive}) => isActive ? 'active-link':''}>Women</NavLink></li>
           <li><NavLink to="/kids" className={({isActive}) => isActive ? 'active-link':''}>Kids</NavLink></li>
         </ul>
-      </div>
-      }
+      </div>}
 
       {variant === "default" &&
       <div className="flex justify-center">
-        {/* Search bar */}
-        <div className="border rounded-full flex overflow-hidden">
-          <div className="flex items-center justify-center px-4 border-1">
+        
+        <div className="border rounded-full flex overflow-hidden hover:border-black">
+          <div className="flex items-center justify-center px-4">
             <svg
               className="h-4 w-4 text-grey-dark"
               fill="currentColor"
@@ -40,16 +43,18 @@ function Navigation({variant = "default"}) {
             <input type="text" className="px-4 py-2 outline-none" placeholder="Search"/>
           </div>
         </div>
-      </div>
-      }
+      </div>}
 
       <div className="flex flex-wrap items-center gap-4">
-        {/* Action Items - icons */}
+        
         {variant === "default" &&
           <ul className="flex gap-8 ">
             <li><button><Wishlist /></button></li>
             <li><button onClick={() => navigate("/account-details/profile")}><AccountIcon /></button></li>
-            <li><NavLink to='/cart-items'><CartIcon/></NavLink></li>
+            <li><Link to='/cart-items' className='flex flex-wrap'><CartIcon/>
+            {cartLength > 0 &&
+              <div className='absolute ml-6 inline-flex items-center justify-center h-5 w-5 bg-black rounded-full text-white text-xs border-white border-1'>{cartLength}</div>}
+            </Link></li>
           </ul>}
 
           {variant === "auth" && 
@@ -57,6 +62,7 @@ function Navigation({variant = "default"}) {
             <li className='text-black border border-black hover:bg-slate-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none'><NavLink to={"/v1/login"} className={({isActive})=> isActive ? 'active-link':''}>Login</NavLink></li>
             <li className='text-black border border-black hover:bg-slate-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none'><NavLink to={"/v1/register"} className={({isActive})=> isActive ? 'active-link':''}>Register</NavLink></li>
           </ul>}
+
       </div>
     </nav>
   );
