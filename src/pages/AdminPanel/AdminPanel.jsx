@@ -1,7 +1,6 @@
 import React from 'react';
 import { Admin, fetchUtils, Resource } from 'react-admin';
-import simpleRestProvider from "ra-data-simple-rest";
-
+import simpleRestProvider from 'ra-data-simple-rest';
 
 import ProductList from './Product/ProductList';
 import EditProduct from './Product/EditProduct';
@@ -9,6 +8,9 @@ import CreateProduct from './Product/CreateProduct';
 
 import CategoryList from './Category/CategoryList';
 import CategoryEdit from './Category/CategoryEdit';
+
+import OrderList from './Orders/OrderList';
+import OrderEdit from './Orders/OrderEdit';
 
 const httpClient = (url, options = {}) => {
   const token = localStorage.getItem('authToken');
@@ -24,6 +26,7 @@ export default function AdminPanel() {
     <Admin dataProvider={dataProvider} basename="/admin">
       <Resource name="products" list={ProductList} edit={EditProduct} create={CreateProduct} />
       <Resource name="category" list={CategoryList} edit={CategoryEdit} />
+      <Resource name="orders" list={OrderList} edit={OrderEdit} />
     </Admin>
   );
 }

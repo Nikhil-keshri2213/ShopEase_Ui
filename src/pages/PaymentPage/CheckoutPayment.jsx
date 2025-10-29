@@ -1,73 +1,131 @@
-import React, { useCallback, useState } from "react";
-import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { placeOrderAPI } from "../../api/order";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../store/features/cart";
-import { createOrderRequest } from "../../utils/order-util";
-import { setLoading } from "../../store/features/common";
+import React, { useState } from "react";
+import {
+  PaymentElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+import { useNavigate } from "react-router-dom";
 
-const CheckoutForm = ({ userId, addressId, amount }) => {
+const CheckoutForm = ({ userId, addressId, amount, orderId, paymentIntentId }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const cartItems = useSelector(selectCartItems);
-  const dispatch = useDispatch();
-  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = useCallback(
-    async (event) => {
-      event.preventDefault();
-      dispatch(setLoading(true));
-      setError("");
+  const [message, setMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-      if (!stripe || !elements) {
-        setError("Stripe not loaded");
-        dispatch(setLoading(false));
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    setIsLoading(true);
+    setMessage(null);
+
+    try {
+      // Confirm the payment
+      const { error, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: window.location.origin + "/payment-success",
+        },
+        redirect: "if_required",
+      });
+
+      if (error) {
+        setMessage(error.message);
+        setIsLoading(false);
         return;
       }
 
-      try {
-        // confirm payment first
-        const result = await stripe.confirmPayment({
-          elements,
-          confirmParams: {
-            return_url: "http://localhost:5173/confirmPayment",
+      if (paymentIntent && paymentIntent.status === "succeeded") {
+        console.log("Payment succeeded:", paymentIntent);
+
+        // Update payment status in your backend
+        const token = localStorage.getItem("token");
+        
+        const response = await fetch("http://localhost:8080/api/order/update-payment", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
           },
+          body: JSON.stringify({
+            paymentIntent: paymentIntent.id,
+            status: "succeeded",
+          }),
         });
 
-        if (result.error) {
-          setError(result.error.message);
-          return;
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Payment updated in backend:", data);
+          
+          // Clear cart from localStorage or your state management
+          localStorage.removeItem("cart");
+          
+          // Navigate to success page
+          navigate("/order-success", { 
+            state: { 
+              orderId: data.orderId,
+              amount: amount 
+            } 
+          });
+        } else {
+          throw new Error("Failed to update payment status");
         }
-
-        // Only if payment succeeds → create order
-        const orderRequest = createOrderRequest(cartItems, userId, addressId, amount);
-        await placeOrderAPI(orderRequest);
-
-      } catch (err) {
-        setError("Order or payment failed");
-        console.error(err);
-      } finally {
-        dispatch(setLoading(false));
       }
-    },
-    [addressId, cartItems, dispatch, elements, stripe, userId, amount]
-  );
+    } catch (err) {
+      console.error("Payment error:", err);
+      setMessage(err.message || "An unexpected error occurred.");
+    }
+
+    setIsLoading(false);
+  };
 
   return (
-    <form
-      className="items-center p-4 mt-4 w-[380px] h-auto bg-white rounded-lg shadow-lg"
-      onSubmit={handleSubmit}
-    >
-      <h2 className="text-lg font-semibold mb-4">Enter Payment Details</h2>
-      <PaymentElement />
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
+      <PaymentElement id="payment-element" />
+      
       <button
-        type="submit"
-        disabled={!stripe}
-        className="w-full items-center h-[48px] bg-black border rounded-lg mt-6 text-white hover:bg-gray-800 transition"
+        disabled={isLoading || !stripe || !elements}
+        className={`w-full mt-6 py-3 px-4 rounded-lg font-semibold text-white transition-colors ${
+          isLoading || !stripe || !elements
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-blue-600 hover:bg-blue-700"
+        }`}
       >
-        Pay Now
+        {isLoading ? (
+          <span className="flex items-center justify-center">
+            <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+                fill="none"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+            Processing...
+          </span>
+        ) : (
+          `Pay ₹${amount.toFixed(2)}`
+        )}
       </button>
-      {error && <p className="text-sm pt-4 text-red-600">{error}</p>}
+
+      {message && (
+        <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-600 text-sm">{message}</p>
+        </div>
+      )}
     </form>
   );
 };

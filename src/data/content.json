@@ -66,7 +66,7 @@
                     },
                     {
                         "label":"Track Order",
-                        "path":"/track-order"
+                        "path":"/account-details/orders"
                     },
                     {
                         "label":"Returns & Refunds",

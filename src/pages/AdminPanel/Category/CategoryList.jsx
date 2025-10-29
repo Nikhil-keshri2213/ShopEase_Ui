@@ -9,14 +9,6 @@ const CategoryList = () => {
         <TextField source="name" />
         <TextField source="code" />
         <TextField source="description" />
-        {/* <ArrayField source="categoryType">
-            
-          <TextField disabled source="id" />
-          <TextField source="name" />
-          <TextField source="code" />
-          <TextField source="description" />
-          
-        </ArrayField> */}
       </Datagrid>
     </List>
   );

@@ -1,34 +1,48 @@
+// api/order.js
 import axios from "axios";
-import { API_BASE_URL, getHeaders } from "./constant";
 
-export const placeOrderAPI = async (data)=>{
-    const url = API_BASE_URL + '/api/order';
-    try{
-        const response = await axios(url,{
-            method:"POST",
-            data:data,
-            headers:getHeaders()
-        });
-        console.log(response?.data);
-        
-        return response?.data;
-    }
-    catch(err){
-        throw new Error(err);
-    }
-}
+const API_BASE_URL = "http://localhost:8080/api";
 
-export const confirmPaymentAPI = async (data)=>{
-    const url = API_BASE_URL + '/api/order/update-payment';
-    try{
-        const response = await axios(url,{
-            method:"POST",
-            data:data,
-            headers:getHeaders()
-        });
-        return response?.data;
-    }
-    catch(err){
-        throw new Error(err);
-    }
-}
+export const confirmPaymentAPI = async (paymentData) => {
+  try {
+    const token = localStorage.getItem("token");
+    
+    const response = await axios.post(
+      `${API_BASE_URL}/order/update-payment`,
+      paymentData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    
+    return response.data;
+  } catch (error) {
+    console.error("Payment confirmation error:", error);
+    throw error;
+  }
+};
+
+export const placeOrderAPI = async (orderData) => {
+  try {
+    const token = localStorage.getItem("token");
+    
+    const response = await axios.post(
+      `${API_BASE_URL}/order`,
+      orderData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    
+    return response.data;
+  } catch (error) {
+    console.error("Order placement error:", error);
+    throw error;
+  }
+};
