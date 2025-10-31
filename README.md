@@ -12,6 +12,7 @@ A one-stop platform for all your fashion needs — discover, shop, and manage ev
 - 🧩 RESTful API built with Spring Boot  
 
 ### 🛠️ Tech Stack
+- **Frontend:** React Js, Tailwind CSS, JavaScript
 - **Backend:** Spring Boot (Java 17)  
 - **Database:** PostgreSQL  
 - **Authentication:** JWT, OAuth2  
