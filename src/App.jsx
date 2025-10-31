@@ -1,6 +1,7 @@
 import HeroSection from "./components/HeroSection/HeroSection";
 import NewArrival from "./components/Sections/NewArrival";
 import content from "./data/content.json";
+import contentHome from "./data/homepage.json";
 import Category from "./components/Sections/Category";
 import ScatteredIcons from "./styles/ScatteredIcons";
 import { useEffect } from "react";
@@ -31,7 +32,7 @@ function App() {
       <div
         className="text-gray-900 font-sans relative overflow-hidden"
         style={{
-          background: `linear-gradient(60deg, #D2C598, #807049)`,
+          background: `linear-gradient(60deg, #EAEAEA, #ced4da)`,
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
           backgroundSize: "cover",
@@ -39,7 +40,7 @@ function App() {
         }}>
         
         {/* Scattered icons background layer */}
-        <ScatteredIcons numIcons={25} />
+        <ScatteredIcons numIcons={30} />
 
         {/* Main content layer */}
         <div className="relative z-10">
@@ -47,8 +48,8 @@ function App() {
             <NewArrival />
           </section>
 
-          <section className="max-w-7xl mx-auto py-12 px-4">
-            {content?.pages?.shop?.sections?.map((item, index) => (
+          <section className="w-full mx-auto py-12 px-4">
+            {contentHome?.pages?.shop?.sections?.map((item, index) => (
               <Category key={item?.title + index} {...item} />
             ))}
           </section>

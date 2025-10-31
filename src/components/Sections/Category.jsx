@@ -7,12 +7,12 @@ function Category({ title, data }) {
  const titleLink = title.toLowerCase().includes('women') ? '/womens' : '/mens';
 
   return (
-    <div className="mb-16 px-6 shadow-lg rounded-2xl border-white/20 border-2 p-6 bg-white/40">
+    <div className="mb-16 px-6 shadow-xl rounded-2xl border-black/10 border-2 p-2 bg-white/80">
       {/* Section Heading */}
       <SectionHeading title={title} />
 
       {/* Cards Container */}
-      <div className="mt-8 flex flex-wrap gap-6 justify-start overflow-x-auto snap-x snap-mandatory">
+      <div className="mt-6 mb-2 flex flex-wrap gap-6 justify-center overflow-x-auto snap-x snap-mandatory">
         {data?.map((item, index) => (
           <div key={index} className="snap-start">
             <Card

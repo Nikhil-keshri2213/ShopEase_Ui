@@ -24,7 +24,7 @@ const items = [
 
 function NewArrival() {
   return (
-    <div className="p-4 shadow-lg rounded-2xl border-white/20 border-2 bg-white/40">
+    <div className="p-4 shadow-lg rounded-2xl border-black/10 border-2 bg-white/80">
       <SectionHeading title={"New Arrivals"} />
       <Carousel
         responsive={responsive}
@@ -33,7 +33,7 @@ function NewArrival() {
         draggable={false}
         showDots={false}
         infinite={true}
-        itemClass="px-3"
+        itemClass="px-2"
         className="mt-6">
 
         {items.map((item, index) => (

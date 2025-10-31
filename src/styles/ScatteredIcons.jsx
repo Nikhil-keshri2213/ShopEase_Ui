@@ -101,7 +101,7 @@ const ScatteredIcons = () => {
           style={{
             top: `${item.top}%`,
             left: `${item.left}%`,
-            opacity: item.opacity,
+            opacity: 0.5-item.opacity,
             transform: `rotate(${item.rotation}deg) translate(-50%, -50%)`,
           }}>
           <item.Icon size={100} />
