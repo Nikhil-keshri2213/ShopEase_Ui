@@ -1,14 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
-import FilterIcon from "../../components/Common/FilterIcon";
+import FilterIcon from "../../components/Common/FilterIcon.jsx";
 import content from "../../data/content.json";
-import { Categories } from "../../components/Filters/Categories";
-import { PriceFilter } from "../../components/Filters/PriceFilter";
-import { ColorFilter } from "../../components/Filters/ColorFilter";
-import { SizeFilter } from "../../components/Filters/SizeFilter";
-import { ProductCard } from "./ProductCard";
-import { getAllProducts } from "../../api/fetchProducts";
+import { Categories } from "../../components/Filters/Categories.jsx";
+import { PriceFilter } from "../../components/Filters/PriceFilter.jsx";
+import { ColorFilter } from "../../components/Filters/ColorFilter.jsx";
+import { SizeFilter } from "../../components/Filters/SizeFilter.jsx";
+import { ProductCard } from "./ProductCard.jsx";
+import { getAllProducts } from "../../api/fetchProducts.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../store/features/common";
+import { setLoading } from "../../store/features/common.js";
 
 const categories = content?.categories;
 

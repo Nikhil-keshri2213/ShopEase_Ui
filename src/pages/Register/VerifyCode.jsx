@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setLoading } from '../../store/features/common';
-import { verifyAPI } from '../../api/authentication';
+import { setLoading } from '../../store/features/common.js';
+import { verifyAPI } from '../../api/authentication.jsx';
 
 export const VerifyCode = ({ email }) => {
   const [values, setValues] = useState({

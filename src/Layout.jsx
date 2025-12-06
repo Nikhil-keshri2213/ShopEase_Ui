@@ -1,9 +1,9 @@
 import React from "react";
-import Navigation from "./components/Navigation/Navigation";
-import Footer from "./components/Footer/Footer";
+import Navigation from "./components/Navigation/Navigation.jsx";
+import Footer from "./components/Footer/Footer.jsx";
 import { Outlet } from "react-router-dom";
 import content from "./data/content.json";
-import Spinner from "./components/Spinner/Spinner";
+import Spinner from "./components/Spinner/Spinner.jsx";
 import { useSelector } from "react-redux";
 
 //ShopApplicationWrapper 

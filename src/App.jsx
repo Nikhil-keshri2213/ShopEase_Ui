@@ -1,14 +1,14 @@
-import HeroSection from "./components/HeroSection/HeroSection";
-import NewArrival from "./components/Sections/NewArrival";
+import HeroSection from "./components/HeroSection/HeroSection.jsx";
+import NewArrival from "./components/Sections/NewArrival.jsx";
 import content from "./data/content.json";
 import contentHome from "./data/homepage.json";
-import Category from "./components/Sections/Category";
-import ScatteredIcons from "./styles/ScatteredIcons";
+import Category from "./components/Sections/Category.jsx";
+import ScatteredIcons from "./styles/ScatteredIcons.jsx";
 import { useEffect } from "react";
-import { fetchCategories } from "./api/fetchCategories";
+import { fetchCategories } from "./api/fetchCategories.jsx";
 import { useDispatch } from "react-redux";
-import { loadCategories } from "./store/features/category";
-import { setLoading } from "./store/features/common";
+import { loadCategories } from "./store/features/category.js";
+import { setLoading } from "./store/features/common.js";
 
 function App() {
   const dispatch = useDispatch();

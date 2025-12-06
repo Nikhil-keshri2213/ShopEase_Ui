@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_BASE_URL, API_URL } from "./constant"
+import { API_BASE_URL, API_URL } from "./constant.jsx";
 
 export const fetchCategories = async() =>{
     const url = API_BASE_URL + API_URL.GET_CATEGORIES;

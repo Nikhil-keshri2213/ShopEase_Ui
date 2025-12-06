@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useInput, useNotify } from 'react-admin';
-import { fileUploadAPI } from '../../api/fileUploadApi';
+import { fileUploadAPI } from '../../api/fileUploadApi.jsx';
 
 const CustomImageInput = ({ source, label }) => {
     const { field } = useInput({ source });

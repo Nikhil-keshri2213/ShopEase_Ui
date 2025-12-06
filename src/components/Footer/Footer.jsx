@@ -1,6 +1,6 @@
 import React from 'react'
-import FbIcon from '../common/FbIcon'
-import InstaIcon from '../common/InstaIcon'
+import FbIcon from '../common/FbIcon.jsx'
+import InstaIcon from '../common/InstaIcon.jsx'
 
 const Footer = ({ content }) => {
   return (

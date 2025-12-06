@@ -1,23 +1,23 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from './Layout';
-import App from './App'; // Homepage
-import { ProductListPage } from "./pages/productListPage/ProductListPage";
-import {ProductDetail} from "./pages/productListPage/ProductDetailPage/ProductDetail"
-import { loadProductBySlug } from "./routes/products";
-import AuthenticationWrapper from "./pages/AuthenticationWrapper";
-import { Login } from "./pages/Login/Login";
-import { Register } from "./pages/Register/Register";
-import { OAuth2LoginCallback } from "./pages/OAuth2LoginCallback";
-import Cart from "./pages/Cart/Cart";
-import Account from "./pages/Account/Account";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import Checkout from "./pages/Checkout/Checkout";
-import PaymentPage from "./pages/PaymentPage/PaymentPage";
-import Profile from "./pages/Account/Profile";
-import Settings from "./pages/Account/Settings";
-import Orders from "./pages/Account/Orders";
-import ConfirmPayment from './pages/ConfirmPayment/ConfirmPayment'
-import AdminPanel from "./pages/AdminPanel/AdminPanel";
+import Layout from './Layout.jsx';
+import App from './App.jsx'; // Homepage
+import { ProductListPage } from "./pages/productListPage/ProductListPage.jsx";
+import {ProductDetail} from "./pages/productListPage/ProductDetailPage/ProductDetail.jsx"
+import { loadProductBySlug } from "./routes/products.jsx";
+import AuthenticationWrapper from "./pages/AuthenticationWrapper.jsx";
+import { Login } from "./pages/Login/Login.jsx";
+import { Register } from "./pages/Register/Register.jsx";
+import { OAuth2LoginCallback } from "./pages/OAuth2LoginCallback.jsx";
+import Cart from "./pages/Cart/Cart.jsx";
+import Account from "./pages/Account/Account.jsx";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
+import Checkout from "./pages/Checkout/Checkout.jsx";
+import PaymentPage from "./pages/PaymentPage/PaymentPage.jsx";
+import Profile from "./pages/Account/Profile.jsx";
+import Settings from "./pages/Account/Settings.jsx";
+import Orders from "./pages/Account/Orders.jsx";
+import ConfirmPayment from './pages/ConfirmPayment/ConfirmPayment.jsx'
+import AdminPanel from "./pages/AdminPanel/AdminPanel.jsx";
 
 
 export const router = createBrowserRouter([

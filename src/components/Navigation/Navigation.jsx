@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Wishlist } from '../Common/Wishlist';
-import { AccountIcon } from '../Common/AccountIcon';
-import { CartIcon } from '../Common/CartIcon';
-import './Navigation.css';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { countCartItems } from '../../store/features/cart';
 import { Menu, X } from 'lucide-react';
+
+import { Wishlist } from '../Common/Wishlist.jsx';
+import { AccountIcon } from '../Common/AccountIcon.jsx';
+import { CartIcon } from '../Common/CartIcon.jsx';
+import './Navigation.css';
+import { countCartItems } from '../../store/features/cart.js';
 
 function Navigation({ variant = "default" }) {
   const cartLength = useSelector(countCartItems);

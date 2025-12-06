@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../store/features/cart";
-import { clearCart } from "../../store/actions/cartAction";
-import { fetchUserDetails } from "../../api/userInfo";
-import { setLoading } from "../../store/features/common";
+import { selectCartItems } from "../../store/features/cart.js";
+import { clearCart } from "../../store/actions/cartAction.js ";
+import { fetchUserDetails } from "../../api/userInfo.jsx";
+import { setLoading } from "../../store/features/common.js";
 import { useNavigate } from "react-router-dom";
-import PaymentPage from "../PaymentPage/PaymentPage";
+import PaymentPage from "../PaymentPage/PaymentPage.jsx";
 import Modal from "react-modal";
-import { placeOrderAPI } from "../../api/order";
+import { placeOrderAPI } from "../../api/order.jsx";
 
 Modal.setAppElement("#root");
 

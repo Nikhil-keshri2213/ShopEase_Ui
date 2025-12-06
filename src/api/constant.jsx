@@ -1,4 +1,4 @@
-import { getToken } from "../utils/jwt-helper";
+import { getToken } from "../utils/jwt-helper.js";
 
 export const API_URL = {
     GET_PRODUCTS:'/api/products',

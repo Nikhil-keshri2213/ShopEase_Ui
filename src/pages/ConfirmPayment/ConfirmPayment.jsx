@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { confirmPaymentAPI } from "../../api/order";
+import { confirmPaymentAPI } from "../../api/order.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../store/features/common";
-import Spinner from "../../components/Spinner/Spinner";
-import { clearCart } from "../../store/actions/cartAction";
+import { setLoading } from "../../store/features/common.js";
+import Spinner from "../../components/Spinner/Spinner.jsx";
+import { clearCart } from "../../store/actions/cartAction.js";
 
 const ConfirmPayment = () => {
   const location = useLocation();

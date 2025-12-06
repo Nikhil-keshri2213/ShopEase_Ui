@@ -1,7 +1,7 @@
 // api/order.js
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8080/api";
+const API_BASE_URL = "https://shopease-backend-ikca.onrender.com/api";
 
 export const confirmPaymentAPI = async (paymentData) => {
   try {

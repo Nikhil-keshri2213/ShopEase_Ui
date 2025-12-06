@@ -1,4 +1,4 @@
-import { addToCart, updateQuantity, removeFromCart, deleteCart} from "../features/cart"
+import { addToCart, updateQuantity, removeFromCart, deleteCart} from "../features/cart.js";
 
 export const addItemToCartAction = (productItem) => {
     return (dispatch, state) =>{

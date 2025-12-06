@@ -1,12 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCartItems } from '../../store/features/cart';
-import { NumberInput } from '../../components/Number Input/NumberInput';
-import { deleteItemFromCartAction, updateItemToCartAction } from '../../store/actions/cartAction';
-import DeleteIcon from '../../components/common/DeleteIcon';
+import { selectCartItems } from '../../store/features/cart.js';
+import { NumberInput } from '../../components/Number Input/NumberInput.jsx';
+import { deleteItemFromCartAction, updateItemToCartAction } from '../../store/actions/cartAction.js';
+import DeleteIcon from '../../components/common/DeleteIcon.jsx';
 import Modal from 'react-modal';
-import { customStyles } from '../../styles/modal';
-import { isTokenValid } from '../../utils/jwt-helper';
+import { customStyles } from '../../styles/modal.js';
+import { isTokenValid } from '../../utils/jwt-helper.js';
 import { Link, useNavigate } from 'react-router-dom';
 import EmptyCart from '../../assets/img/empty_cart.png';
 

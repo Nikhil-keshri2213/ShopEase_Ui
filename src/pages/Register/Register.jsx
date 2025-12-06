@@ -1,10 +1,10 @@
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setLoading } from "../../store/features/common";
-import { GoogleSignIn } from "../../components/Button/GoogleSignin";
-import { registerAPI } from "../../api/authentication";
-import { VerifyCode } from "./VerifyCode";
+import { setLoading } from "../../store/features/common.js";
+import { GoogleSignIn } from "../../components/Button/GoogleSignIn.jsx";
+import { registerAPI } from "../../api/authentication.jsx";
+import { VerifyCode } from "./VerifyCode.jsx";
 
 export const Register = () => {
   const [values, setValues] = useState({

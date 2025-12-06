@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { isTokenValid } from '../../Utils/jwt-helper';
+import { isTokenValid } from '../../Utils/jwt-helper.js';
 
 const ProtectedRoute = ({children}) => {
     const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import React,{useCallback} from 'react'
 import GoogleLogo from '../../assets/img/Google.png'
-import { API_BASE_URL } from '../../api/constant'
+import { API_BASE_URL } from '../../api/constant.jsx'
 
 export const GoogleSignIn = () => {
 

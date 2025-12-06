@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "react-modal";
-import { removeAddress, selectUserInfo } from "../../store/features/user";
-import AddAddress from "./AddAddress";
-import { setLoading } from "../../store/features/common";
-import { deleteAddressAPI, updateAddressAPI } from "../../api/userInfo";
+import { removeAddress, selectUserInfo } from "../../store/features/user.js";
+import AddAddress from "./AddAddress.jsx";
+import { setLoading } from "../../store/features/common.js";
+import { deleteAddressAPI, updateAddressAPI } from "../../api/userInfo.jsx";
 
 const Profile = () => {
   const customStyles = {

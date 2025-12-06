@@ -1,5 +1,5 @@
 import React from 'react'
-import ArrowIcon from '../common/ArrowIcon'
+import ArrowIcon from '../common/ArrowIcon.jsx'
 import { useNavigate } from 'react-router-dom'
 
 const Card = ({ imagePath, title, description, actionArrow, height = "220px", width = "200px" , titleLinks}) => {

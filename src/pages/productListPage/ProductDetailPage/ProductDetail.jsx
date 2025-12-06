@@ -1,20 +1,21 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb";
-import Rating from "../../../components/Rating/rating";
-import { SizeFilter } from "../../../components/Filters/SizeFilter";
-import ProductColors from "./ProductColors";
-import { CartIcon } from "../../../components/Common/CartIcon";
-import SvgCreditCard from "../../../components/Common/SvgCreditCard";
-import SvgCloth from "../../../components/Common/SvgCloth";
-import SvgShipping from "../../../components/Common/SvgShipping";
-import SvgReturn from "../../../components/Common/SvgReturn";
-import SectionHeading from "../../../components/Sections/SectionHeading/SectionHeading";
-import ProductCard from "../ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
-import { getAllProducts } from "../../../api/fetchProducts";
-import { addItemToCartAction } from "../../../store/actions/cartAction";
+
+import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.jsx";
+import Rating from "../../../components/Rating/Rating.jsx";
+import { SizeFilter } from "../../../components/Filters/SizeFilter.jsx";
+import ProductColors from "./ProductColors.jsx";
+import { CartIcon } from "../../../components/Common/CartIcon.jsx";
+import SvgCreditCard from "../../../components/Common/SvgCreditCard.jsx";
+import SvgCloth from "../../../components/Common/SvgCloth.jsx";
+import SvgShipping from "../../../components/Common/SvgShipping.jsx";
+import SvgReturn from "../../../components/Common/SvgReturn.jsx";
+import SectionHeading from "../../../components/Sections/SectionHeading/SectionHeading.jsx";
+import ProductCard from "../ProductCard.jsx";
+import { getAllProducts } from "../../../api/fetchProducts.jsx";
+import { addItemToCartAction } from "../../../store/actions/cartAction.js";
 
 const extraSections = [
   { icon: <SvgCreditCard />, label: "Secure Payments" },

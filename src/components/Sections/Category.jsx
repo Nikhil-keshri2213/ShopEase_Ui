@@ -1,5 +1,5 @@
-import SectionHeading from "./SectionHeading/SectionHeading";
-import Card from "../Card/Card";
+import SectionHeading from "./SectionHeading/SectionHeading.jsx";
+import Card from "../Card/Card.jsx";
 import { useState } from "react";
 
 function Category({ title, data }) {

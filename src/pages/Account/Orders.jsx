@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../store/features/common";
-import { cancelOrderAPI, fetchOrderAPI } from "../../api/userInfo";
-import {cancelOrder,loadOrders,selectAllOrders,} from "../../store/features/user";
+import { setLoading } from "../../store/features/common.js";
+import { cancelOrderAPI, fetchOrderAPI } from "../../api/userInfo.jsx";
+import {cancelOrder,loadOrders,selectAllOrders,} from "../../store/features/user.js";
 import moment from "moment";
-import Timeline from "../../components/Timeline/Timeline";
-import { getStepCount } from "../../utils/order-util";
+import Timeline from "../../components/Timeline/Timeline.jsx";
+import { getStepCount } from "../../utils/order-util.js";
 
 const Orders = () => {
   const dispatch = useDispatch();

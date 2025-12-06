@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect } from "react";
-import { logOut } from "../../Utils/jwt-helper";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../store/features/common";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
-import { fetchUserDetails } from "../../api/userInfo";
-import { loadUserInfo, selectIsUserAdmin, selectUserInfo } from "../../store/features/user";
+import { useDispatch, useSelector } from "react-redux";
+
+import { logOut } from "../../Utils/jwt-helper.js";
+import { setLoading } from "../../store/features/common.js";
+import { fetchUserDetails } from "../../api/userInfo.jsx";
+import { loadUserInfo, selectIsUserAdmin, selectUserInfo } from "../../store/features/user.js";
 
 const Account = () => {
   const navigate = useNavigate();

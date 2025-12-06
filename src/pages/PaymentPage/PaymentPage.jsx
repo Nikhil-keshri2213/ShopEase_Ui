@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import CheckoutForm from "./CheckoutPayment";
+import CheckoutForm from "./CheckoutPayment.jsx";
 
 const stripePromise = loadStripe("pk_test_51SHPvrJBdVxn8zqlyY62ZXlyNYJGsjxEDq9NbAbPaqATlEV3xfGTXJJnRVWzWwy1RLyYVMmwnLNkgMOKIvmAvSss001KDl7Uum");
 

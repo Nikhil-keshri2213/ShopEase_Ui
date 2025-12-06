@@ -1,6 +1,6 @@
-import { getProductBySlug } from '../api/fetchProducts';
+import { getProductBySlug } from '../api/fetchProducts.jsx';
 import content from '../data/content.json';
-import { setLoading } from '../store/features/common';
+import { setLoading } from '../store/features/common.js';
 
 import store from '../store/store'
 

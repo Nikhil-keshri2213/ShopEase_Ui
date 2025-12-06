@@ -1,8 +1,8 @@
 import React from "react";
-import Navigation from "../components/Navigation/Navigation";
+import Navigation from "../components/Navigation/Navigation.jsx";
 import { Outlet, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Spinner from "../components/Spinner/Spinner";
+import Spinner from "../components/Spinner/Spinner.jsx";
 
 import LoginImg from "../assets/img/bg-1-n.jpg";   // login specific image
 import RegisterImg from "../assets/img/bg-2.jpg"; // register specific image

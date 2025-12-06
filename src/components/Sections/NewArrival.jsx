@@ -1,6 +1,5 @@
 import React from "react";
-import SectionHeading from "./SectionHeading/SectionHeading";
-import Card from "../Card/Card";
+import SectionHeading from "./SectionHeading/SectionHeading.jsx";
 
 import jeans from "../../assets/img/jeans.jpg";
 import shirts from "../../assets/img/shirts.jpg";

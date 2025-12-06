@@ -1,7 +1,5 @@
 import React, { useCallback } from "react";
-import { logOut } from "../../utils/jwt-helper";
-import { useNavigate } from "react-router-dom";
-import { Shield, Trash2, UserCog, LogOut } from "lucide-react"; // icons
+import { Shield} from "lucide-react"; // icons
 
 const Settings = () => {
 
